@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.TestsMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Tests">
+    <id column="ts_id" jdbcType="INTEGER" property="tsId" />
+    <result column="ts_name" jdbcType="VARCHAR" property="tsName" />
+    <result column="ts_date"  property="tsDate" />
+    <result column="ts_ep" jdbcType="VARCHAR" property="tsEp" />
+    <result column="ts_class" jdbcType="VARCHAR" property="tsClass" />
+    <result column="ts_num" jdbcType="INTEGER" property="tsNum" />
+    <result column="ts_status" jdbcType="INTEGER" property="tsStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ts_id, ts_name, ts_date, ts_ep, ts_class, ts_num, ts_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tests
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tests
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Tests">
+    <selectKey keyProperty="tsId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tests (ts_name, ts_date, ts_ep, 
+      ts_class, ts_num, ts_status
+      )
+    values (#{tsName,jdbcType=VARCHAR}, #{tsDate}, #{tsEp,jdbcType=VARCHAR}, 
+      #{tsClass,jdbcType=VARCHAR}, #{tsNum,jdbcType=INTEGER}, #{tsStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Tests">
+    <selectKey keyProperty="tsId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tests
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tsName != null">
+        ts_name,
+      </if>
+      <if test="tsDate != null">
+        ts_date,
+      </if>
+      <if test="tsEp != null">
+        ts_ep,
+      </if>
+      <if test="tsClass != null">
+        ts_class,
+      </if>
+      <if test="tsNum != null">
+        ts_num,
+      </if>
+      <if test="tsStatus != null">
+        ts_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tsName != null">
+        #{tsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tsDate != null">
+        #{tsDate},
+      </if>
+      <if test="tsEp != null">
+        #{tsEp,jdbcType=VARCHAR},
+      </if>
+      <if test="tsClass != null">
+        #{tsClass,jdbcType=VARCHAR},
+      </if>
+      <if test="tsNum != null">
+        #{tsNum,jdbcType=INTEGER},
+      </if>
+      <if test="tsStatus != null">
+        #{tsStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Tests">
+    update tests
+    <set>
+      <if test="tsName != null">
+        ts_name = #{tsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tsDate != null">
+        ts_date = #{tsDate},
+      </if>
+      <if test="tsEp != null">
+        ts_ep = #{tsEp,jdbcType=VARCHAR},
+      </if>
+      <if test="tsClass != null">
+        ts_class = #{tsClass,jdbcType=VARCHAR},
+      </if>
+      <if test="tsNum != null">
+        ts_num = #{tsNum,jdbcType=INTEGER},
+      </if>
+      <if test="tsStatus != null">
+        ts_status = #{tsStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Tests">
+    update tests
+    set ts_name = #{tsName,jdbcType=VARCHAR},
+      ts_date = #{tsDate},
+      ts_ep = #{tsEp,jdbcType=VARCHAR},
+      ts_class = #{tsClass,jdbcType=VARCHAR},
+      ts_num = #{tsNum,jdbcType=INTEGER},
+      ts_status = #{tsStatus,jdbcType=INTEGER}
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </update>
+</mapper>

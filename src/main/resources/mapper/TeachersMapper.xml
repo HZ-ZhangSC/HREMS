@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.TeachersMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Teachers">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_pwd" jdbcType="VARCHAR" property="tPwd" />
+    <result column="t_name" jdbcType="VARCHAR" property="tName" />
+    <result column="t_sub" jdbcType="VARCHAR" property="tSub" />
+    <result column="t_rt" jdbcType="INTEGER" property="tRt" />
+    <result column="t_pid" jdbcType="INTEGER" property="tPid" />
+    <result column="t_sch" jdbcType="VARCHAR" property="tSch" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t_id, t_pwd, t_name, t_sub, t_rt, t_pid, t_sch
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teachers
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teachers
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Teachers">
+    <selectKey keyProperty="tId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into teachers (t_pwd, t_name, t_sub, 
+      t_rt, t_pid, t_sch)
+    values (#{tPwd,jdbcType=VARCHAR}, #{tName,jdbcType=VARCHAR}, #{tSub,jdbcType=VARCHAR}, 
+      #{tRt,jdbcType=INTEGER}, #{tPid,jdbcType=INTEGER}, #{tSch,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Teachers">
+    <selectKey keyProperty="tId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into teachers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tPwd != null">
+        t_pwd,
+      </if>
+      <if test="tName != null">
+        t_name,
+      </if>
+      <if test="tSub != null">
+        t_sub,
+      </if>
+      <if test="tRt != null">
+        t_rt,
+      </if>
+      <if test="tPid != null">
+        t_pid,
+      </if>
+      <if test="tSch != null">
+        t_sch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tPwd != null">
+        #{tPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSub != null">
+        #{tSub,jdbcType=VARCHAR},
+      </if>
+      <if test="tRt != null">
+        #{tRt,jdbcType=INTEGER},
+      </if>
+      <if test="tPid != null">
+        #{tPid,jdbcType=INTEGER},
+      </if>
+      <if test="tSch != null">
+        #{tSch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Teachers">
+    update teachers
+    <set>
+      <if test="tPwd != null">
+        t_pwd = #{tPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="tName != null">
+        t_name = #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSub != null">
+        t_sub = #{tSub,jdbcType=VARCHAR},
+      </if>
+      <if test="tRt != null">
+        t_rt = #{tRt,jdbcType=INTEGER},
+      </if>
+      <if test="tPid != null">
+        t_pid = #{tPid,jdbcType=INTEGER},
+      </if>
+      <if test="tSch != null">
+        t_sch = #{tSch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Teachers">
+    update teachers
+    set t_pwd = #{tPwd,jdbcType=VARCHAR},
+      t_name = #{tName,jdbcType=VARCHAR},
+      t_sub = #{tSub,jdbcType=VARCHAR},
+      t_rt = #{tRt,jdbcType=INTEGER},
+      t_pid = #{tPid,jdbcType=INTEGER},
+      t_sch = #{tSch,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

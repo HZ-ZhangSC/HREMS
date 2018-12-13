@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.EmsMapper">
+	<resultMap id="BaseResultMap" type="cn.edu.hziee.model.Ems">
+		<id column="er_id" jdbcType="INTEGER" property="erId" />
+		<result column="er_tsid" jdbcType="INTEGER" property="erTsid" />
+		<result column="er_cp" jdbcType="INTEGER" property="erCp" />
+		<result column="er_num" jdbcType="INTEGER" property="erNum" />
+		<result column="er_time" property="erTime" />
+		<result column="er_name" jdbcType="VARCHAR" property="erName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		er_id, er_tsid, er_cp, er_num, er_time, er_name
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ems
+		where er_id = #{erId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByTsid" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ems
+		where er_tsid = #{erTsid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByKeys" resultMap="BaseResultMap">
+		select
+		e.er_id,e.er_tsid,e.er_cp,e.er_num,e.er_time,e.er_name,t.ts_name
+		from
+		ems e, tests t
+		<where>
+
+			t.ts_name = #{tsName,jdbcType=VARCHAR}
+
+			or t.ts_date &gt;= #{begin}
+
+			and t.ts_date &lt;= #{end}
+
+			or t.ts_status =#{status,jdbcType=INTEGER}
+
+			and t.ts_id =e.er_tsid
+		</where>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ems
+		where er_id = #{erId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.edu.hziee.model.Ems">
+		<selectKey keyProperty="erId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into ems (er_tsid, er_cp, er_num,
+		er_time, er_name)
+		values
+		(#{erTsid,jdbcType=INTEGER}, #{erCp,jdbcType=INTEGER},
+		#{erNum,jdbcType=INTEGER},
+		#{erTime},
+		#{erName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.edu.hziee.model.Ems">
+		<selectKey keyProperty="erId" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into ems
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="erTsid != null">
+				er_tsid,
+			</if>
+			<if test="erCp != null">
+				er_cp,
+			</if>
+			<if test="erNum != null">
+				er_num,
+			</if>
+			<if test="erTime != null">
+				er_time,
+			</if>
+			<if test="erName != null">
+				er_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="erTsid != null">
+				#{erTsid,jdbcType=INTEGER},
+			</if>
+			<if test="erCp != null">
+				#{erCp,jdbcType=INTEGER},
+			</if>
+			<if test="erNum != null">
+				#{erNum,jdbcType=INTEGER},
+			</if>
+			<if test="erTime != null">
+				#{erTime},
+			</if>
+			<if test="erName != null">
+				#{erName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Ems">
+		update ems
+		<set>
+			<if test="erTsid != null">
+				er_tsid = #{erTsid,jdbcType=INTEGER},
+			</if>
+			<if test="erCp != null">
+				er_cp = #{erCp,jdbcType=INTEGER},
+			</if>
+			<if test="erNum != null">
+				er_num = #{erNum,jdbcType=INTEGER},
+			</if>
+			<if test="erTime != null">
+				er_time = #{erTime},
+			</if>
+			<if test="erName != null">
+				er_name = #{erName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where er_id = #{erId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Ems">
+		update ems
+		set
+		er_tsid = #{erTsid,jdbcType=INTEGER},
+		er_cp = #{erCp,jdbcType=INTEGER},
+		er_num = #{erNum,jdbcType=INTEGER},
+		er_time =#{erTime},
+		er_name = #{erName,jdbcType=VARCHAR}
+		where er_id = #{erId,jdbcType=INTEGER}
+	</update>
+</mapper>

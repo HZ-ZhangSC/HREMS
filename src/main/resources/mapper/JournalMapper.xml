@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.JournalMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Journal">
+    <id column="j_id" jdbcType="INTEGER" property="jId" />
+    <result column="j_user" jdbcType="VARCHAR" property="jUser" />
+    <result column="j_msg" jdbcType="VARCHAR" property="jMsg" />
+    <result column="j_date"  property="jDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    j_id, j_user, j_msg, j_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from journal
+    where j_id = #{jId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from journal
+    where j_id = #{jId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Journal">
+    insert into journal (j_id, j_user, j_msg, 
+      j_date)
+    values (#{jId,jdbcType=INTEGER}, #{jUser,jdbcType=VARCHAR}, #{jMsg,jdbcType=VARCHAR}, 
+      #{jDate})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Journal">
+    insert into journal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jId != null">
+        j_id,
+      </if>
+      <if test="jUser != null">
+        j_user,
+      </if>
+      <if test="jMsg != null">
+        j_msg,
+      </if>
+      <if test="jDate != null">
+        j_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jId != null">
+        #{jId,jdbcType=INTEGER},
+      </if>
+      <if test="jUser != null">
+        #{jUser,jdbcType=VARCHAR},
+      </if>
+      <if test="jMsg != null">
+        #{jMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="jDate != null">
+        #{jDate},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Journal">
+    update journal
+    <set>
+      <if test="jUser != null">
+        j_user = #{jUser,jdbcType=VARCHAR},
+      </if>
+      <if test="jMsg != null">
+        j_msg = #{jMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="jDate != null">
+        j_date = #{jDate},
+      </if>
+    </set>
+    where j_id = #{jId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Journal">
+    update journal
+    set j_user = #{jUser,jdbcType=VARCHAR},
+      j_msg = #{jMsg,jdbcType=VARCHAR},
+      j_date = #{jDate}
+    where j_id = #{jId,jdbcType=INTEGER}
+  </update>
+</mapper>

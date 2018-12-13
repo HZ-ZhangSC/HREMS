@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.ScoresMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Scores">
+    <id column="sc_id" jdbcType="INTEGER" property="scId" />
+    <result column="sc_sname" jdbcType="VARCHAR" property="scSname" />
+    <result column="sc_eid" jdbcType="INTEGER" property="scEid" />
+    <result column="sc_tid" jdbcType="INTEGER" property="scTid" />
+    <result column="sc_name" jdbcType="VARCHAR" property="scName" />
+    <result column="sc_cs" jdbcType="VARCHAR" property="scCs" />
+    <result column="sc_sc" jdbcType="VARCHAR" property="scSc" />
+    <result column="sc_sid" jdbcType="INTEGER" property="scSid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sc_id, sc_sname, sc_eid, sc_tid, sc_name, sc_cs, sc_sc, sc_sid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scores
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByKh" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scores
+    where sc_eid = #{scEid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scores
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Scores">
+    <selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into scores (sc_sname, sc_eid, sc_tid, 
+      sc_name, sc_cs, sc_sc, 
+      sc_sid)
+    values (#{scSname,jdbcType=VARCHAR}, #{scEid,jdbcType=INTEGER}, #{scTid,jdbcType=INTEGER}, 
+      #{scName,jdbcType=VARCHAR}, #{scCs,jdbcType=VARCHAR}, #{scSc,jdbcType=VARCHAR}, 
+      #{scSid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Scores">
+    <selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into scores
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scSname != null">
+        sc_sname,
+      </if>
+      <if test="scEid != null">
+        sc_eid,
+      </if>
+      <if test="scTid != null">
+        sc_tid,
+      </if>
+      <if test="scName != null">
+        sc_name,
+      </if>
+      <if test="scCs != null">
+        sc_cs,
+      </if>
+      <if test="scSc != null">
+        sc_sc,
+      </if>
+      <if test="scSid != null">
+        sc_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scSname != null">
+        #{scSname,jdbcType=VARCHAR},
+      </if>
+      <if test="scEid != null">
+        #{scEid,jdbcType=INTEGER},
+      </if>
+      <if test="scTid != null">
+        #{scTid,jdbcType=INTEGER},
+      </if>
+      <if test="scName != null">
+        #{scName,jdbcType=VARCHAR},
+      </if>
+      <if test="scCs != null">
+        #{scCs,jdbcType=VARCHAR},
+      </if>
+      <if test="scSc != null">
+        #{scSc,jdbcType=VARCHAR},
+      </if>
+      <if test="scSid != null">
+        #{scSid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Scores">
+    update scores
+    <set>
+      <if test="scSname != null">
+        sc_sname = #{scSname,jdbcType=VARCHAR},
+      </if>
+      <if test="scEid != null">
+        sc_eid = #{scEid,jdbcType=INTEGER},
+      </if>
+      <if test="scTid != null">
+        sc_tid = #{scTid,jdbcType=INTEGER},
+      </if>
+      <if test="scName != null">
+        sc_name = #{scName,jdbcType=VARCHAR},
+      </if>
+      <if test="scCs != null">
+        sc_cs = #{scCs,jdbcType=VARCHAR},
+      </if>
+      <if test="scSc != null">
+        sc_sc = #{scSc,jdbcType=VARCHAR},
+      </if>
+      <if test="scSid != null">
+        sc_sid = #{scSid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Scores">
+    update scores
+    set sc_sname = #{scSname,jdbcType=VARCHAR},
+      sc_eid = #{scEid,jdbcType=INTEGER},
+      sc_tid = #{scTid,jdbcType=INTEGER},
+      sc_name = #{scName,jdbcType=VARCHAR},
+      sc_cs = #{scCs,jdbcType=VARCHAR},
+      sc_sc = #{scSc,jdbcType=VARCHAR},
+      sc_sid = #{scSid,jdbcType=INTEGER}
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+</mapper>

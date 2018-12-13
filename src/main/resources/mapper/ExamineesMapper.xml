@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.ExamineesMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Examinees">
+    <id column="e_eid" jdbcType="INTEGER" property="eEid" />
+    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+    <result column="e_sid" jdbcType="INTEGER" property="eSid" />
+    <result column="e_tid" jdbcType="INTEGER" property="eTid" />
+    <result column="e_tnm" jdbcType="VARCHAR" property="eTnm" />
+    <result column="e_class" jdbcType="VARCHAR" property="eClass" />
+    <result column="e_place" jdbcType="VARCHAR" property="ePlace" />
+    <result column="e_time"  property="eTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    e_eid, e_name, e_sid, e_tid, e_tnm, e_class, e_place, e_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examinees
+    where e_eid = #{eEid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examinees
+    where e_eid = #{eEid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Examinees">
+    <selectKey keyProperty="eEid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into examinees (e_name, e_sid, e_tid, 
+      e_tnm, e_class, e_place, 
+      e_time)
+    values (#{eName,jdbcType=VARCHAR}, #{eSid,jdbcType=INTEGER}, #{eTid,jdbcType=INTEGER}, 
+      #{eTnm,jdbcType=VARCHAR}, #{eClass,jdbcType=VARCHAR}, #{ePlace,jdbcType=VARCHAR}, 
+      #{eTime})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Examinees">
+    <selectKey keyProperty="eEid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into examinees
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eName != null">
+        e_name,
+      </if>
+      <if test="eSid != null">
+        e_sid,
+      </if>
+      <if test="eTid != null">
+        e_tid,
+      </if>
+      <if test="eTnm != null">
+        e_tnm,
+      </if>
+      <if test="eClass != null">
+        e_class,
+      </if>
+      <if test="ePlace != null">
+        e_place,
+      </if>
+      <if test="eTime != null">
+        e_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eName != null">
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eSid != null">
+        #{eSid,jdbcType=INTEGER},
+      </if>
+      <if test="eTid != null">
+        #{eTid,jdbcType=INTEGER},
+      </if>
+      <if test="eTnm != null">
+        #{eTnm,jdbcType=VARCHAR},
+      </if>
+      <if test="eClass != null">
+        #{eClass,jdbcType=VARCHAR},
+      </if>
+      <if test="ePlace != null">
+        #{ePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="eTime != null">
+        #{eTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Examinees">
+    update examinees
+    <set>
+      <if test="eName != null">
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eSid != null">
+        e_sid = #{eSid,jdbcType=INTEGER},
+      </if>
+      <if test="eTid != null">
+        e_tid = #{eTid,jdbcType=INTEGER},
+      </if>
+      <if test="eTnm != null">
+        e_tnm = #{eTnm,jdbcType=VARCHAR},
+      </if>
+      <if test="eClass != null">
+        e_class = #{eClass,jdbcType=VARCHAR},
+      </if>
+      <if test="ePlace != null">
+        e_place = #{ePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="eTime != null">
+        e_time = #{eTime},
+      </if>
+    </set>
+    where e_eid = #{eEid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Examinees">
+    update examinees
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_sid = #{eSid,jdbcType=INTEGER},
+      e_tid = #{eTid,jdbcType=INTEGER},
+      e_tnm = #{eTnm,jdbcType=VARCHAR},
+      e_class = #{eClass,jdbcType=VARCHAR},
+      e_place = #{ePlace,jdbcType=VARCHAR},
+      e_time = #{eTime}
+    where e_eid = #{eEid,jdbcType=INTEGER}
+  </update>
+</mapper>

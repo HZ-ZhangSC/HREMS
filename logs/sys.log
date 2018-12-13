@@ -1,0 +1,16 @@
+2018-12-10 14:27:31.173 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.Application : 48 ] - Starting Application on DESKTOP-O09ERO7 with PID 12928 (E:\myeclipse_data\HREMS\target\classes started by 24568 in E:\myeclipse_data\HREMS)
+2018-12-10 14:27:31.189 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.Application : 637 ] - No active profile set, falling back to default profiles: default
+2018-12-10 14:27:32.089 [ background-preinit ] - [ INFO  ] [ org.hibernate.validator.internal.util.Version : 30 ] - HV000001: Hibernate Validator 5.3.4.Final
+2018-12-10 14:27:34.522 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.conf.RedisConf : 47 ] - 初始化JedisPoolConfig
+2018-12-10 14:27:34.536 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.conf.RedisConf : 63 ] - 初始化RedisConnectionFactory
+2018-12-10 14:27:34.707 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.conf.RedisConf : 34 ] - 初始化CacheManager
+2018-12-10 14:27:35.421 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 179 ] - Starting service Tomcat
+2018-12-10 14:27:35.424 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardEngine : 179 ] - Starting Servlet Engine: Apache Tomcat/8.5.11
+2018-12-10 14:27:35.724 [ localhost-startStop-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 179 ] - Initializing Spring embedded WebApplicationContext
+2018-12-10 14:27:37.959 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 179 ] - Initializing ProtocolHandler ["http-nio-9090"]
+2018-12-10 14:27:37.972 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 179 ] - Starting ProtocolHandler [http-nio-9090]
+2018-12-10 14:27:37.987 [ restartedMain ] - [ INFO  ] [ org.apache.tomcat.util.net.NioSelectorPool : 179 ] - Using a shared selector for servlet write/read
+2018-12-10 14:27:38.020 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.Application : 57 ] - Started Application in 7.493 seconds (JVM running for 10.61)
+2018-12-10 14:30:18.415 [ http-nio-9090-exec-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 179 ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-12-10 14:35:50.277 [ http-nio-9090-exec-3 ] - [ INFO  ] [ cn.edu.hziee.controller.StudentInfoController : 46 ] - 学生: 16905836 张世程==>登录
+2018-12-10 14:50:27.662 [ http-nio-9090-exec-6 ] - [ INFO  ] [ cn.edu.hziee.controller.StudentInfoController : 46 ] - 学生: 16905836 张世程==>登录

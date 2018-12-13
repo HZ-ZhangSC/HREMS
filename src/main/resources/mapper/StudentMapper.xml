@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Student">
+    <id column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="s_sch" jdbcType="VARCHAR" property="sSch" />
+    <result column="s_name" jdbcType="VARCHAR" property="sName" />
+    <result column="s_major" jdbcType="VARCHAR" property="sMajor" />
+    <result column="s_pid" jdbcType="VARCHAR" property="sPid" />
+    <result column="s_pwd" jdbcType="VARCHAR" property="sPwd" />
+    <result column="s_class" jdbcType="VARCHAR" property="sClass" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    s_id, s_sch, s_name, s_major, s_pid, s_pwd, s_class
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Student">
+    <selectKey keyProperty="sId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student (s_id,s_sch, s_name, s_major, 
+      s_pid, s_pwd, s_class)
+    values (#{sSch,jdbcType=VARCHAR}, #{sId,jdbcType=INTEGER},#{sName,jdbcType=VARCHAR}, #{sMajor,jdbcType=VARCHAR}, 
+      #{sPid,jdbcType=VARCHAR}, #{sPwd,jdbcType=VARCHAR}, #{sClass,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Student">
+    <selectKey keyProperty="sId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sSch != null">
+        s_sch,
+      </if>
+      <if test="sName != null">
+        s_name,
+      </if>
+      <if test="sMajor != null">
+        s_major,
+      </if>
+      <if test="sPid != null">
+        s_pid,
+      </if>
+      <if test="sPwd != null">
+        s_pwd,
+      </if>
+      <if test="sClass != null">
+        s_class,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sSch != null">
+        #{sSch,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null">
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sMajor != null">
+        #{sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sPid != null">
+        #{sPid,jdbcType=VARCHAR},
+      </if>
+      <if test="sPwd != null">
+        #{sPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sClass != null">
+        #{sClass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Student">
+    update student
+    <set>
+      <if test="sSch != null">
+        s_sch = #{sSch,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null">
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sMajor != null">
+        s_major = #{sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sPid != null">
+        s_pid = #{sPid,jdbcType=VARCHAR},
+      </if>
+      <if test="sPwd != null">
+        s_pwd = #{sPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sClass != null">
+        s_class = #{sClass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Student">
+    update student
+    set s_sch = #{sSch,jdbcType=VARCHAR},
+      s_name = #{sName,jdbcType=VARCHAR},
+      s_major = #{sMajor,jdbcType=VARCHAR},
+      s_pid = #{sPid,jdbcType=VARCHAR},
+      s_pwd = #{sPwd,jdbcType=VARCHAR},
+      s_class = #{sClass,jdbcType=VARCHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+</mapper>

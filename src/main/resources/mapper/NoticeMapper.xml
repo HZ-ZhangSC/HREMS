@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.dao.NoticeMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Notice">
+    <id column="no_id" jdbcType="INTEGER" property="noId" />
+    <result column="no_title" jdbcType="VARCHAR" property="noTitle" />
+    <result column="no_content" jdbcType="VARCHAR" property="noContent" />
+    <result column="no_date"  property="noDate" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    no_id, no_title, no_content, no_date, tname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice
+    where no_id = #{noId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice
+    where no_id = #{noId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="no_id" keyProperty="noId" parameterType="cn.edu.hziee.model.Notice" useGeneratedKeys="true">
+    insert into notice (no_title, no_content, no_date, 
+      tname)
+    values (#{noTitle,jdbcType=VARCHAR}, #{noContent,jdbcType=VARCHAR}, #{noDate}, 
+      #{tname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="no_id" keyProperty="noId" parameterType="cn.edu.hziee.model.Notice" useGeneratedKeys="true">
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noTitle != null">
+        no_title,
+      </if>
+      <if test="noContent != null">
+        no_content,
+      </if>
+      <if test="noDate != null">
+        no_date,
+      </if>
+      <if test="tname != null">
+        tname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noTitle != null">
+        #{noTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noContent != null">
+        #{noContent,jdbcType=VARCHAR},
+      </if>
+      <if test="noDate != null">
+        #{noDate},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Notice">
+    update notice
+    <set>
+      <if test="noTitle != null">
+        no_title = #{noTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noContent != null">
+        no_content = #{noContent,jdbcType=VARCHAR},
+      </if>
+      <if test="noDate != null">
+        no_date = #{noDate},
+      </if>
+      <if test="tname != null">
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where no_id = #{noId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Notice">
+    update notice
+    set no_title = #{noTitle,jdbcType=VARCHAR},
+      no_content = #{noContent,jdbcType=VARCHAR},
+      no_date = #{noDate},
+      tname = #{tname,jdbcType=VARCHAR}
+    where no_id = #{noId,jdbcType=INTEGER}
+  </update>
+</mapper>

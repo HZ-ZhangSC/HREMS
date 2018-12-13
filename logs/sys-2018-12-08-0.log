@@ -1,0 +1,14 @@
+2018-12-08 12:23:49.904 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.Application : 48 ] - Starting Application on DESKTOP-O09ERO7 with PID 12404 (E:\myeclipse_data\HREMS\target\classes started by 24568 in E:\myeclipse_data\HREMS)
+2018-12-08 12:23:49.917 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.Application : 637 ] - No active profile set, falling back to default profiles: default
+2018-12-08 12:23:50.834 [ background-preinit ] - [ INFO  ] [ org.hibernate.validator.internal.util.Version : 30 ] - HV000001: Hibernate Validator 5.3.4.Final
+2018-12-08 12:23:52.730 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.conf.RedisConf : 47 ] - 初始化JedisPoolConfig
+2018-12-08 12:23:52.737 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.conf.RedisConf : 63 ] - 初始化RedisConnectionFactory
+2018-12-08 12:23:52.893 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.conf.RedisConf : 34 ] - 初始化CacheManager
+2018-12-08 12:23:53.565 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 179 ] - Starting service Tomcat
+2018-12-08 12:23:53.567 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardEngine : 179 ] - Starting Servlet Engine: Apache Tomcat/8.5.11
+2018-12-08 12:23:53.806 [ localhost-startStop-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 179 ] - Initializing Spring embedded WebApplicationContext
+2018-12-08 12:23:56.422 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 179 ] - Initializing ProtocolHandler ["http-nio-9090"]
+2018-12-08 12:23:56.438 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 179 ] - Starting ProtocolHandler [http-nio-9090]
+2018-12-08 12:23:56.451 [ restartedMain ] - [ INFO  ] [ org.apache.tomcat.util.net.NioSelectorPool : 179 ] - Using a shared selector for servlet write/read
+2018-12-08 12:23:56.471 [ restartedMain ] - [ INFO  ] [ cn.edu.hziee.Application : 57 ] - Started Application in 7.43 seconds (JVM running for 10.699)
+2018-12-08 12:26:09.687 [ http-nio-9090-exec-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 179 ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
