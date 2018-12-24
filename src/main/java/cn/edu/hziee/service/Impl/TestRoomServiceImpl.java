@@ -23,7 +23,7 @@ public class TestRoomServiceImpl implements TestRoomService {
 	}
 
 	@Override
-	public Ems getTestRoomInfoById(Integer erId) {
+	public Ems searchTestRoomInfoById(Integer erId) {
 		return emsMapper.selectByPrimaryKey(erId);
 	}
 
@@ -45,6 +45,11 @@ public class TestRoomServiceImpl implements TestRoomService {
 	@Override
 	public List<Ems> searchTestRoomByKeys(Date begin, Date end, int status, String tsName) {
 		return emsMapper.selectByKeys(begin, end, status, tsName);
+	}
+
+	@Override
+	public List<Ems> searchAllTestRoom() {
+		return emsMapper.selectAll();
 	}
 
 }

@@ -1,7 +1,9 @@
 package cn.edu.hziee.dao;
 
-import cn.edu.hziee.model.Journal;
+import org.apache.ibatis.annotations.Mapper;
 
+import cn.edu.hziee.model.Journal;
+@Mapper
 public interface JournalMapper {
     int deleteByPrimaryKey(Integer jId);
 

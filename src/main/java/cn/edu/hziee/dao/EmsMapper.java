@@ -27,5 +27,7 @@ public interface EmsMapper {
 	List<Ems> selectByKeys(@Param("begin") Date begin, @Param("end") Date end,
 			 @Param("status") int status, @Param("tsName") String tsName);
 
+	List<Ems> selectAll();
+
 
 }

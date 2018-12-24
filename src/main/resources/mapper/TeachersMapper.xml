@@ -13,6 +13,17 @@
   <sql id="Base_Column_List">
     t_id, t_pwd, t_name, t_sub, t_rt, t_pid, t_sch
   </sql>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teachers
+  </select>
+  <select id="selectByName" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teachers
+    where t_name = #{tName,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -104,12 +115,23 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Teachers">
     update teachers
-    set t_pwd = #{tPwd,jdbcType=VARCHAR},
-      t_name = #{tName,jdbcType=VARCHAR},
-      t_sub = #{tSub,jdbcType=VARCHAR},
+    set
+      t_pid = #{tPid,jdbcType=INTEGER}, 
       t_rt = #{tRt,jdbcType=INTEGER},
-      t_pid = #{tPid,jdbcType=INTEGER},
+      t_sub = #{tSub,jdbcType=VARCHAR},
       t_sch = #{tSch,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updatePassword" parameterType="cn.edu.hziee.model.Teachers">
+    update teachers
+    set 
+      t_pwd = #{tPwd,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateRt" parameterType="cn.edu.hziee.model.Teachers">//权限等级修改
+    update teachers
+    set 
+      t_rt = #{tRt,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=INTEGER}
   </update>
 </mapper>

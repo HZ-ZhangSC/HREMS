@@ -9,7 +9,7 @@ public interface TestRoomService {
 
 	Ems addTestRoom(Ems ems);
 
-	Ems getTestRoomInfoById(Integer erId);
+	Ems searchTestRoomInfoById(Integer erId);
 
 	int deleteTestRoom(Integer erId);
 
@@ -18,5 +18,7 @@ public interface TestRoomService {
 	int updateTestRoom(Ems ems);
 
 	List<Ems> searchTestRoomByKeys(Date begin, Date end, int status, String tsName);
+
+	List<Ems> searchAllTestRoom();
 
 }

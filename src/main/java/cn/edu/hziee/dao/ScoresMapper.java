@@ -1,11 +1,14 @@
 package cn.edu.hziee.dao;
 
-import org.apache.ibatis.annotations.Mapper;
+import cn.edu.hziee.model.Scores; 
+import java.util.List;
 
-import cn.edu.hziee.model.Scores;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ScoresMapper {
+
     int deleteByPrimaryKey(Integer scId);
 
     int insert(Scores record);
@@ -17,6 +20,10 @@ public interface ScoresMapper {
     int updateByPrimaryKeySelective(Scores record);
 
     int updateByPrimaryKey(Scores record);
+    
+    int deleteByKh(Integer eid);
 
-	Scores selectByKh(Integer scEid);
+	Scores selectByKh(Integer eid);
+
+	List<Scores> selectAll();
 }

@@ -6,18 +6,21 @@
     <result column="ts_name" jdbcType="VARCHAR" property="tsName" />
     <result column="ts_date"  property="tsDate" />
     <result column="ts_ep" jdbcType="VARCHAR" property="tsEp" />
-    <result column="ts_class" jdbcType="VARCHAR" property="tsClass" />
+    <result column="ts_tid" jdbcType="VARCHAR" property="tsTid" />
     <result column="ts_num" jdbcType="INTEGER" property="tsNum" />
     <result column="ts_status" jdbcType="INTEGER" property="tsStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    ts_id, ts_name, ts_date, ts_ep, ts_class, ts_num, ts_status
+    ts_id, ts_name, ts_date, ts_ep, ts_tid, ts_num, ts_status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tests
     where ts_id = #{tsId,jdbcType=INTEGER}
+  </select>
+   <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from tests
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tests
@@ -28,10 +31,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into tests (ts_name, ts_date, ts_ep, 
-      ts_class, ts_num, ts_status
+      ts_tid, ts_num, ts_status
       )
     values (#{tsName,jdbcType=VARCHAR}, #{tsDate}, #{tsEp,jdbcType=VARCHAR}, 
-      #{tsClass,jdbcType=VARCHAR}, #{tsNum,jdbcType=INTEGER}, #{tsStatus,jdbcType=INTEGER}
+      #{tsTid,jdbcType=VARCHAR}, #{tsNum,jdbcType=INTEGER}, #{tsStatus,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.hziee.model.Tests">
@@ -49,8 +52,8 @@
       <if test="tsEp != null">
         ts_ep,
       </if>
-      <if test="tsClass != null">
-        ts_class,
+      <if test="tsTid != null">
+        ts_tid,
       </if>
       <if test="tsNum != null">
         ts_num,
@@ -69,8 +72,8 @@
       <if test="tsEp != null">
         #{tsEp,jdbcType=VARCHAR},
       </if>
-      <if test="tsClass != null">
-        #{tsClass,jdbcType=VARCHAR},
+      <if test="tsTid != null">
+        #{tsTid,jdbcType=VARCHAR},
       </if>
       <if test="tsNum != null">
         #{tsNum,jdbcType=INTEGER},
@@ -92,8 +95,8 @@
       <if test="tsEp != null">
         ts_ep = #{tsEp,jdbcType=VARCHAR},
       </if>
-      <if test="tsClass != null">
-        ts_class = #{tsClass,jdbcType=VARCHAR},
+      <if test="tsTid != null">
+        ts_tid = #{tsTid,jdbcType=VARCHAR},
       </if>
       <if test="tsNum != null">
         ts_num = #{tsNum,jdbcType=INTEGER},
@@ -109,7 +112,7 @@
     set ts_name = #{tsName,jdbcType=VARCHAR},
       ts_date = #{tsDate},
       ts_ep = #{tsEp,jdbcType=VARCHAR},
-      ts_class = #{tsClass,jdbcType=VARCHAR},
+      ts_class = #{tsTid,jdbcType=VARCHAR},
       ts_num = #{tsNum,jdbcType=INTEGER},
       ts_status = #{tsStatus,jdbcType=INTEGER}
     where ts_id = #{tsId,jdbcType=INTEGER}

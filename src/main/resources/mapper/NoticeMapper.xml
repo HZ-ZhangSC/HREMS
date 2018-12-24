@@ -6,10 +6,10 @@
     <result column="no_title" jdbcType="VARCHAR" property="noTitle" />
     <result column="no_content" jdbcType="VARCHAR" property="noContent" />
     <result column="no_date"  property="noDate" />
-    <result column="tname" jdbcType="VARCHAR" property="tname" />
+    <result column="no_name" jdbcType="VARCHAR" property="noName" />
   </resultMap>
   <sql id="Base_Column_List">
-    no_id, no_title, no_content, no_date, tname
+    no_id, no_title, no_content, no_date,no_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -17,19 +17,27 @@
     from notice
     where no_id = #{noId,jdbcType=INTEGER}
   </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select 
+     <include refid="Base_Column_List" />
+    from notice
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from notice
     where no_id = #{noId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="no_id" keyProperty="noId" parameterType="cn.edu.hziee.model.Notice" useGeneratedKeys="true">
-    insert into notice (no_title, no_content, no_date, 
-      tname)
-    values (#{noTitle,jdbcType=VARCHAR}, #{noContent,jdbcType=VARCHAR}, #{noDate}, 
-      #{tname,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="cn.edu.hziee.model.Notice">
+    insert into notice ( no_title, no_content, no_date, no_name)
+    values ( #{noTitle,jdbcType=VARCHAR}, #{noContent,jdbcType=VARCHAR}, 
+      #{noDate},#{noName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="no_id" keyProperty="noId" parameterType="cn.edu.hziee.model.Notice" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Notice">
     insert into notice
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noId != null">
+        no_id,
+      </if>
       <if test="noTitle != null">
         no_title,
       </if>
@@ -39,11 +47,14 @@
       <if test="noDate != null">
         no_date,
       </if>
-      <if test="tname != null">
-        tname,
+      <if test="noName != null">
+       no_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noId != null">
+        #{noId,jdbcType=INTEGER},
+      </if>
       <if test="noTitle != null">
         #{noTitle,jdbcType=VARCHAR},
       </if>
@@ -53,8 +64,8 @@
       <if test="noDate != null">
         #{noDate},
       </if>
-      <if test="tname != null">
-        #{tname,jdbcType=VARCHAR},
+      <if test="noName != null">
+        #{noName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -70,9 +81,6 @@
       <if test="noDate != null">
         no_date = #{noDate},
       </if>
-      <if test="tname != null">
-        tname = #{tname,jdbcType=VARCHAR},
-      </if>
     </set>
     where no_id = #{noId,jdbcType=INTEGER}
   </update>
@@ -80,8 +88,7 @@
     update notice
     set no_title = #{noTitle,jdbcType=VARCHAR},
       no_content = #{noContent,jdbcType=VARCHAR},
-      no_date = #{noDate},
-      tname = #{tname,jdbcType=VARCHAR}
+      no_date = #{noDate}
     where no_id = #{noId,jdbcType=INTEGER}
   </update>
 </mapper>

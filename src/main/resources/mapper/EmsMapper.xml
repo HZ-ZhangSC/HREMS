@@ -19,6 +19,12 @@
 		from ems
 		where er_id = #{erId,jdbcType=INTEGER}
 	</select>
+	<select id="selectAll" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ems
+	</select>
 	<select id="selectByTsid" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		select

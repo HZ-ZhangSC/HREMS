@@ -5,7 +5,7 @@
     <id column="j_id" jdbcType="INTEGER" property="jId" />
     <result column="j_user" jdbcType="VARCHAR" property="jUser" />
     <result column="j_msg" jdbcType="VARCHAR" property="jMsg" />
-    <result column="j_date"  property="jDate" />
+    <result column="j_date" property="jDate" />
   </resultMap>
   <sql id="Base_Column_List">
     j_id, j_user, j_msg, j_date

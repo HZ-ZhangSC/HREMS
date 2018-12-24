@@ -1,5 +1,8 @@
 package cn.edu.hziee.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * scores
  * @author 
@@ -20,7 +23,10 @@ public class Scores {
     private String scSc;
 
     private Integer scSid;
-    
+
+    private Date scDate;
+
+
     public Integer getScId() {
         return scId;
     }
@@ -85,12 +91,18 @@ public class Scores {
         this.scSid = scSid;
     }
 
-	@Override
+    public Date getScDate() {
+        return scDate;
+    }
+
+    public void setScDate(Date scDate) {
+        this.scDate = scDate;
+    }
+    
+    @Override
 	public String toString() {
 		return "{\"scId\":\"" + scId + "\", \"scSname\":\"" + scSname + "\", \"scEid\":\"" + scEid + "\", \"scTid\":\""
 				+ scTid + "\", \"scName\":\"" + scName + "\", \"scCs\":\"" + scCs + "\", \"scSc\":\"" + scSc
-				+ "\", \"scSid\":\"" + scSid + "\"}\n";
+				+ "\", \"scSid\":\"" + scSid + "\", \"scDate\":\"" + scDate + "\"}\n";
 	}
-
-  
 }

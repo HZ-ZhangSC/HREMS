@@ -10,15 +10,21 @@
     <result column="sc_cs" jdbcType="VARCHAR" property="scCs" />
     <result column="sc_sc" jdbcType="VARCHAR" property="scSc" />
     <result column="sc_sid" jdbcType="INTEGER" property="scSid" />
+    <result column="sc_date" jdbcType="DATE" property="scDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    sc_id, sc_sname, sc_eid, sc_tid, sc_name, sc_cs, sc_sc, sc_sid
+    sc_id, sc_sname, sc_eid, sc_tid, sc_name, sc_cs, sc_sc, sc_sid, sc_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from scores
     where sc_id = #{scId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scores
   </select>
   <select id="selectByKh" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -30,16 +36,20 @@
     delete from scores
     where sc_id = #{scId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByKh" parameterType="java.lang.Integer">
+    delete from scores
+    where sc_eid = #{scEid,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="cn.edu.hziee.model.Scores">
     <selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into scores (sc_sname, sc_eid, sc_tid, 
       sc_name, sc_cs, sc_sc, 
-      sc_sid)
+      sc_sid, sc_date)
     values (#{scSname,jdbcType=VARCHAR}, #{scEid,jdbcType=INTEGER}, #{scTid,jdbcType=INTEGER}, 
       #{scName,jdbcType=VARCHAR}, #{scCs,jdbcType=VARCHAR}, #{scSc,jdbcType=VARCHAR}, 
-      #{scSid,jdbcType=INTEGER})
+      #{scSid,jdbcType=INTEGER}, #{scDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.hziee.model.Scores">
     <selectKey keyProperty="scId" order="AFTER" resultType="java.lang.Integer">
@@ -68,6 +78,9 @@
       <if test="scSid != null">
         sc_sid,
       </if>
+      <if test="scDate != null">
+        sc_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="scSname != null">
@@ -91,8 +104,43 @@
       <if test="scSid != null">
         #{scSid,jdbcType=INTEGER},
       </if>
+      <if test="scDate != null">
+        #{scDate,jdbcType=DATE},
+      </if>
     </trim>
   </insert>
+  <update id="updateByExampleSelective" parameterType="map">
+    update scores
+    <set>
+      <if test="record.scId != null">
+        sc_id = #{record.scId,jdbcType=INTEGER},
+      </if>
+      <if test="record.scSname != null">
+        sc_sname = #{record.scSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scEid != null">
+        sc_eid = #{record.scEid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scTid != null">
+        sc_tid = #{record.scTid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scName != null">
+        sc_name = #{record.scName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scCs != null">
+        sc_cs = #{record.scCs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scSc != null">
+        sc_sc = #{record.scSc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scSid != null">
+        sc_sid = #{record.scSid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scDate != null">
+        sc_date = #{record.scDate,jdbcType=DATE},
+      </if>
+    </set>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Scores">
     update scores
     <set>
@@ -117,6 +165,9 @@
       <if test="scSid != null">
         sc_sid = #{scSid,jdbcType=INTEGER},
       </if>
+      <if test="scDate != null">
+        sc_date = #{scDate,jdbcType=DATE},
+      </if>
     </set>
     where sc_id = #{scId,jdbcType=INTEGER}
   </update>
@@ -128,7 +179,8 @@
       sc_name = #{scName,jdbcType=VARCHAR},
       sc_cs = #{scCs,jdbcType=VARCHAR},
       sc_sc = #{scSc,jdbcType=VARCHAR},
-      sc_sid = #{scSid,jdbcType=INTEGER}
+      sc_sid = #{scSid,jdbcType=INTEGER},
+      sc_date = #{scDate,jdbcType=DATE}
     where sc_id = #{scId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,7 @@
 package cn.edu.hziee.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.edu.hziee.model.Tests;
@@ -17,4 +19,8 @@ public interface TestsMapper {
     int updateByPrimaryKeySelective(Tests record);
 
     int updateByPrimaryKey(Tests record);
+    
+    List<Tests> selectAll();
+    
+    List<Tests> selectByName(String tsName);
 }

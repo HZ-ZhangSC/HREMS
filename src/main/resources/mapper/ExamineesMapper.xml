@@ -20,6 +20,29 @@
     from examinees
     where e_eid = #{eEid,jdbcType=INTEGER}
   </select>
+  <select id="selectBySname"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examinees
+    where e_name = #{eName,jdbcType=INTEGER}
+  </select>
+   <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examinees
+  </select>
+  <select id="selectBySid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examinees
+    where e_sid = #{eSid,jdbcType=INTEGER}
+  </select>
+  <select id="selectHistoryTestsBySid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+     from examinees e,tests t
+    where e.e_sid = #{eSid,jdbcType=INTEGER} and e.e_tid = t.ts_id and t.ts_status = 3
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from examinees
     where e_eid = #{eEid,jdbcType=INTEGER}
@@ -28,10 +51,10 @@
     <selectKey keyProperty="eEid" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into examinees (e_name, e_sid, e_tid, 
+    insert into examinees (e_eid,e_name, e_sid, e_tid, 
       e_tnm, e_class, e_place, 
       e_time)
-    values (#{eName,jdbcType=VARCHAR}, #{eSid,jdbcType=INTEGER}, #{eTid,jdbcType=INTEGER}, 
+    values (#{eEid,jdbcType=INTEGER},#{eName,jdbcType=VARCHAR}, #{eSid,jdbcType=INTEGER}, #{eTid,jdbcType=INTEGER}, 
       #{eTnm,jdbcType=VARCHAR}, #{eClass,jdbcType=VARCHAR}, #{ePlace,jdbcType=VARCHAR}, 
       #{eTime})
   </insert>

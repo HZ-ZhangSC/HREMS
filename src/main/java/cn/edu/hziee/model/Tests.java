@@ -13,77 +13,78 @@ public class Tests  {
 
     private String tsName;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date tsDate;
 
     private String tsEp;
 
-    private String tsClass;
+    private String tsTid;
 
     private Integer tsNum;
 
     private Integer tsStatus;
 
-    public Integer getTsId() {
-        return tsId;
-    }
+	public Integer getTsId() {
+		return tsId;
+	}
 
-    public void setTsId(Integer tsId) {
-        this.tsId = tsId;
-    }
+	public void setTsId(Integer tsId) {
+		this.tsId = tsId;
+	}
 
-    public String getTsName() {
-        return tsName;
-    }
+	public String getTsName() {
+		return tsName;
+	}
 
-    public void setTsName(String tsName) {
-        this.tsName = tsName;
-    }
+	public void setTsName(String tsName) {
+		this.tsName = tsName;
+	}
 
-    public Date getTsDate() {
-        return tsDate;
-    }
+	public Date getTsDate() {
+		return tsDate;
+	}
 
-    public void setTsDate(Date tsDate) {
-        this.tsDate = tsDate;
-    }
+	public void setTsDate(Date tsDate) {
+		this.tsDate = tsDate;
+	}
 
-    public String getTsEp() {
-        return tsEp;
-    }
+	public String getTsEp() {
+		return tsEp;
+	}
 
-    public void setTsEp(String tsEp) {
-        this.tsEp = tsEp;
-    }
+	public void setTsEp(String tsEp) {
+		this.tsEp = tsEp;
+	}
 
-    public String getTsClass() {
-        return tsClass;
-    }
+	public String getTsTid() {
+		return tsTid;
+	}
 
-    public void setTsClass(String tsClass) {
-        this.tsClass = tsClass;
-    }
+	public void setTsTid(String tsTid) {
+		this.tsTid = tsTid;
+	}
 
-    public Integer getTsNum() {
-        return tsNum;
-    }
+	public Integer getTsNum() {
+		return tsNum;
+	}
 
-    public void setTsNum(Integer tsNum) {
-        this.tsNum = tsNum;
-    }
+	public void setTsNum(Integer tsNum) {
+		this.tsNum = tsNum;
+	}
 
-    public Integer getTsStatus() {
-        return tsStatus;
-    }
+	public Integer getTsStatus() {
+		return tsStatus;
+	}
 
-    public void setTsStatus(Integer tsStatus) {
-        this.tsStatus = tsStatus;
-    }
+	public void setTsStatus(Integer tsStatus) {
+		this.tsStatus = tsStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "{\"tsId\":\"" + tsId + "\", \"tsName\":\"" + tsName + "\", \"tsDate\":\"" + tsDate + "\", \"tsEp\":\""
-				+ tsEp + "\", \"tsClass\":\"" + tsClass + "\", \"tsNum\":\"" + tsNum + "\", \"tsStatus\":\"" + tsStatus
+				+ tsEp + "\", \"tsTid\":\"" + tsTid + "\", \"tsNum\":\"" + tsNum + "\", \"tsStatus\":\"" + tsStatus
 				+ "\"}\n";
 	}
+
+    
 }

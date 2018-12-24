@@ -2,6 +2,8 @@ package cn.edu.hziee.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * examinees
  * @author 
@@ -20,7 +22,7 @@ public class Examinees {
     private String eClass;
 
     private String ePlace;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date eTime;
 
     public Integer geteEid() {

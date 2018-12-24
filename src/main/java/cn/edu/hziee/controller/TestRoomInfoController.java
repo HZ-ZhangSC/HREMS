@@ -1,8 +1,5 @@
 package cn.edu.hziee.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.mockito.Matchers.intThat;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import cn.edu.hziee.model.Ems;
-import cn.edu.hziee.model.Tests;
 import cn.edu.hziee.service.StudentService;
 import cn.edu.hziee.service.TestRoomService;
 import cn.edu.hziee.service.TestService;
@@ -51,7 +44,7 @@ public class TestRoomInfoController {
 	public String addTestRoom(@RequestBody Ems ems){
 		ResultData<Ems> resData = new ResultData<Ems>();
 		Ems testRoom = testRoomService.addTestRoom(ems);
-		if(testRoomService.getTestRoomInfoById(testRoom.getErId())!=null){
+		if(testRoomService.searchTestRoomInfoById(testRoom.getErId())!=null){
 			resData.setStatus(true);
 			resData.setData(testRoom);
 			resData.setMsg("考场添加成功");
@@ -106,6 +99,27 @@ public class TestRoomInfoController {
 			return resData.toString();
 		}
 	}
+	
+	//根据考试id查询考场
+		//@Cacheable(value="EMSCashe")
+		@RequestMapping(value="/searchAll",method=RequestMethod.GET)
+		public String searchAllTestRoom(){
+			ResultData<List<Ems>> resData = new ResultData<List<Ems>>();
+			List<Ems> testRooms = testRoomService.searchAllTestRoom();
+			if(testRooms!=null){
+				resData.setStatus(true);
+				resData.setData(testRooms);
+				resData.setMsg("考场查询成功");
+				log.info("考场查询成功");
+				return resData.toString();
+			}else{
+				resData.setStatus(false);
+				resData.setData(null);
+				resData.setMsg("考场查询失败");
+				log.info("考场查询失败");
+				return resData.toString();
+			}
+		}
 
 
 	//根据考试时间、考试状态、以及考试名称等查询考场,前端所有参数都要传过来
@@ -140,7 +154,7 @@ public class TestRoomInfoController {
 	public String updateTestRoom(@RequestBody Ems ems){
 		ResultData<Ems> resData = new ResultData<Ems>();
 		int flat = testRoomService.updateTestRoom(ems);
-		Ems testRoom = testRoomService.getTestRoomInfoById(ems.getErId());
+		Ems testRoom = testRoomService.searchTestRoomInfoById(ems.getErId());
 		if(flat==1){
 			resData.setStatus(true);
 			resData.setData(testRoom);

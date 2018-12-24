@@ -14,7 +14,7 @@
     select 
     <include refid="Base_Column_List" />
     from manager
-    where m_id = #{mId,jdbcType=INTEGER}
+    where m_zid = #{mZid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from manager

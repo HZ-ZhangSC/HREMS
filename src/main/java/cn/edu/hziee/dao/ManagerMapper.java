@@ -1,7 +1,9 @@
 package cn.edu.hziee.dao;
 
-import cn.edu.hziee.model.Manager;
+import org.apache.ibatis.annotations.Mapper;
 
+import cn.edu.hziee.model.Manager;
+@Mapper
 public interface ManagerMapper {
     int deleteByPrimaryKey(Integer mId);
 
