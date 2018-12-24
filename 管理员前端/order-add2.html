@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生修改</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-body">
+        <form class="layui-form">
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>用户名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="sName" name="sName" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>身份证号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="sPid" name="sPid" required="" lay-verify="phone"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>专业
+              </label>
+              <div class="layui-input-inline">
+                  <select id="sMajor" name="sMajor" class="valid">
+                    <option value="计算机">计算机</option>
+                    <option value="金融">金融</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>学校
+              </label>
+              <div class="layui-input-inline">
+                  <select id="sSch" name="contrller">
+                    <option value="杭州电子科技大学信息工程学院">杭州电子科技大学信息工程学院</option>
+                    <option value="清华">清华</option>
+                    <option value="北大">北大</option>
+                  </select>
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>班级
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sClass" name="email" required=""
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>
+                </div>
+            </div>
+          
+        
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" id="update">
+                  修改
+              </button>
+          </div>
+      </form>
+    </div>
+    <script type="text/javascript">
+    　function GetUrlPara()
+　　{
+　　　　var url = document.location.toString();
+　　　　var arrUrl = url.split("?");
+
+　　　　var para = arrUrl[1];
+　　　　return para;
+　　}
+    $("#update").click(function(){
+        var student = new Object();
+        student.sId = GetUrlPara();
+        student.sName = $.trim($("#sName").val());
+        student.sSch = $.trim($("#sSch").val());          
+        student.sPid = $.trim($("#sPid").val());
+        student.sMajor = $.trim($("#sMajor").val());
+        student.sClass = $.trim($("#sClass").val());
+        console.log(student);
+      $.ajax({
+        type:"POST",
+        url:"http://localhost:9090/student/update",
+        xhrFields: {
+            withCredentials: true
+        },
+        data:JSON.stringify(student),
+        dataType: 'JSON',
+        contentType: "application/json",
+        success:function(result){
+                //alert(msg);
+                if(result.status){
+                    alert("修改成功!");
+                }else{
+                  alert("修改失败，请重试!");
+                }
+              }
+            })
+    });    
+
+
+
+    </script>
+</body>
+</html>

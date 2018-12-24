@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+<body>
+<input type="text" name="ssName" id="ssName" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          <button class="layui-btn"   id="search">查询</button>
+          <table id="data"></table>
+</body>
+<script type="text/javascript">
+      $("#search").click(function(){
+        var stu = new Object();
+        stu.sName = $.trim($("#ssName").val());
+        console.log(stu);
+      $.ajax({
+        type:"POST",
+        url:"http://localhost:9090/student/searchByName",
+        xhrFields: {
+            withCredentials: true
+        },
+        data:JSON.stringify(stu),
+        dataType: 'JSON',
+        contentType: "application/json",
+        success:function(result){
+                //alert(msg);
+                var html = '';
+                for(var i=0;i<result.data.length;i++){
+                  html = html+'<tr>';
+                  html = html + '<th><div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div></th>';
+                  html = html + '<td>' + result.data[i].sId + '</td>';
+                  html = html + '<td>' + result.data[i].sName + '</td>';
+                  html = html + '<td>' + result.data[i].sPid + '</td>';
+                  html = html + '<td>' + result.data[i].sMajor + '</td>';
+                  html = html + '<td>' + result.data[i].sSch + '</td>';
+                  html = html + '<td>' + result.data[i].sClass + '</td>';
+                  html = html + '<td class="td-manage"><a onclick="update('+result.data[i].sId+')" title="修改信息" href="javascript:;"><i class="layui-icon">&#xe631;</i></a><a title="删除" onclick="del('+result.data[i].sId+')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a></td>';
+                  html = html+'<tr>';
+                  console.log(result);
+                }
+                $('#data').append(html);
+                // $("#data1").hide();
+                
+
+              }
+            })
+    });    
+</script> 
+</html>
