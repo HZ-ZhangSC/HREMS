@@ -1,0 +1,200 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>已报考试</title>
+	<meta name="description" content="网站描述，一般显示在搜索引擎搜索结果中的描述文字，用于介绍网站，吸引浏览者点击。" />
+	<meta name="keywords" content="网站关键词" />
+	<meta name="generator" content="MetInfo 5.1.7" />
+	<link href="favicon.ico" rel="shortcut icon" />
+	<link rel="stylesheet" type="text/css" href="css/metinfo.css" />
+	<link rel="stylesheet" type="text/css" href="css/query.css" />
+	<script src="js/jQuery1.7.2.js" type="text/javascript"></script>
+	<script src="js/ch.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="css/font.css">
+	<link rel="stylesheet" href="css/xadmin.css">
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/xadmin.js"></script>
+	<style type="text/css">
+	tr{
+		height: 50px;
+	}
+</style>
+
+</head>
+<body>
+	<header>
+		<div class="inner">
+			<div class="top-logo">
+				<p class="top-word">浩然考试管理系统</p>
+				<div style="text-align: right; color: white;font-size: 15px;">欢迎你<label id="loginUser">
+				</label></div>
+
+			</div>
+
+			<nav>
+				<ul class="list-none">
+					<li id="nav_10001" style='width:161px;'><a href="index.html" class='hover-none nav'><span>网站首页</span></a></li>
+					<li class="line"></li>
+					<li id='nav_2' style='width:161px;'><a href="news.html" class='hover-none nav' ><span>新闻资讯</span></a></li>
+					<li class="line"></li>
+					<li id='nav_32' style='width:161px;' ><a href="result.html" class='hover-none nav'><span>成绩查询</span></a></li>
+					<li class="line"></li>
+					<li id='nav_33' style='width:161px;' ><a href="person.html" class='hover-none nav'><span>个人中心</span></a></li>
+					<li class="line"></li>
+					<li id='nav_33' style='width:161px;' class='navdown'><a href="baoming.html" class='nav'><span>已报考试</span></a></li>
+					<li class="line"></li>
+					<li id='nav_22' style='width:160px;' ><a href="login.html"  class='hover-none nav' ><span>登录</span></a></li>
+				</ul></nav>
+			</div>
+		</header>
+
+		<div class="con">
+			<div class="inner met_flash"><div class="flash">
+				<a href='#' target='_blank' title='企业网站管理系统'><img src='images/img2.jpg' width='980' alt='企业网站管理系统' height='200'></a>
+			</div></div>
+
+
+			<div class="sidebar inner">
+
+				<div class="sb_box">
+					<h3 class="title">
+						<div class="position">当前位置：<a href="index.html" title="网站首页">网站首页</a> &gt; <a href="news.html">已报考试</a></div>
+						<span>已报考试</span>
+					</h3>
+					<div class="clear"></div>
+
+					<div class="active" id="newslist">
+						<div id="container">
+							<table class="layui-table" id="data">
+								<thead>
+									<tr>
+										<th>学号</th>
+										<th>姓名</th>
+										<th>考号</th>
+										<th>科目</th>
+										<th>教室</th>
+										<th>座位号</th>
+										<th>考试时间</th>
+									</tr>
+								</thead>
+								<tbody>
+          <!-- <tr>
+            <td>1</td>
+            <td>张三</td>
+            <td>计算机组成原理</td>
+            <td>02</td>
+            <td>2017-08-17 18:22</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>张三</td>
+            <td>计算机网络</td>
+            <td>03</td>
+            <td>2017-08-18 18:22</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>张三</td>
+            <td>软件工程</td>
+            <td>04</td>
+            <td>2017-08-19 18:22</td>
+        </tr> -->
+    </tbody>
+</table><br>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+
+<footer data-module="2" data-classnow="2">
+	<div class="inner">
+		<div class="foot-nav"><a href="index.html"  title='网站首页'>网站首页</a><span>|</span>
+			<a href="news.html"  title='新闻资讯'>新闻资讯</a><span>|</span>
+			<a href="result.html"  title='成绩查询'>成绩查询</a><span>|</span>
+			<a href="person.html"  title='个人中心'>个人中心</a><span>|</span>
+			<a href="baoming.html"  title='已报考试'>已报考试</a><span>|</span>
+			<a href="login.html"  title='登录'>登录</a></div>
+			<div class="foot-text">
+
+
+			</div>
+		</div>
+	</footer>
+
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			type: "get",
+			url: "http://localhost:9090/student/loginStudent",
+			xhrFields: {
+				withCredentials: true
+			},
+			dataType: 'JSON',
+
+			success: function(result) {
+				console.log(result);
+				$("#loginUser").html(result.data.sName);
+				var sid = result.data.sId;
+                //再次请求ajax获得该考生所有报名考试信息
+				$.ajax({
+					type: "get",
+					url: "http://localhost:9090/examee/searchBySid?sid="+sid,
+					async: false,
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: 'JSON',
+
+					success: function(result) {
+						console.log(result);
+						var html = '';
+						for(var i=0;i<result.data.length;i++){
+							html = html+'<tr>';
+							html = html + '<td>' + result.data[i].eSid + '</td>';
+							html = html + '<td>' + result.data[i].eName + '</td>';
+							html = html + '<td>' + result.data[i].eEid + '</td>';
+							html = html + '<td>' + result.data[i].eTnm + '</td>';
+							html = html + '<td>' + result.data[i].eClass + '</td>';
+							html = html + '<td>' + result.data[i].ePlace + '</td>';
+							html = html + '<td>' + result.data[i].eTime + '</td></tr>';
+						}
+						 $('#data').append(html);
+					}
+				})
+
+			}
+		})
+	});
+  // $(document).ready(function(){
+  //   $.ajax({
+  //             type: "get",
+  //             url: "http://localhost:9090/examee/searchExameeBySid?sid="+sid,
+  //             xhrFields: {
+  //               withCredentials: true
+  //             },
+  //             dataType: 'JSON',
+
+  //             success: function(result) {
+  //               console.log(result);
+  //               var html = '';
+  //               for(var i=0;i<result.data.length;i++){
+  //                 html = html+'<tr>';
+  //                 html = html + '<td>' + result.data[i].eSid + '</td>';
+  //                 html = html + '<td>' + result.data[i].eName + '</td>';
+  //                 html = html + '<td>' + result.data[i].eEid + '</td>';
+  //                 html = html + '<td>' + result.data[i].eTnm + '</td>';
+  //                 html = html + '<td>' + result.data[i].eClass + '</td>';
+  //                 html = html + '<td>' + result.data[i].ePlace + '</td>';
+  //                 html = html + '<td>' + result.data[i].eTime + '</td></tr>';
+  //               }
+  //             }
+  //           })
+  //           });
+</script>
+</html>
